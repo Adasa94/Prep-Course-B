@@ -33,9 +33,7 @@ function invocarMetodo (objeto, metodo) {
   // Nada necesita ser devuelto ("returned")
   // Tu código:
 
-   
-
- 
+  objeto[metodo]();
 
 }
 
@@ -63,8 +61,10 @@ function nuevoUsuario (nombre, email, password) {
   // Devuelve el objeto
   // Tu código:
  usuario = {
-  nombre, email, password
- }
+  nombre:nombre,
+   email:email,
+   password:password
+ };
  return usuario;
 
 }
@@ -73,6 +73,13 @@ function tieneEmail (usuario) {
   // Devuelve "true" si el usuario tiene un valor definido para la propiedad "email"
   // De lo contratio, devuelve "false"
   // Tu código:
+  if (usuario.email === undefined || usuario.email === null) {
+    return false
+  }
+
+  else {
+    return true;
+  }
 
  
   
@@ -84,6 +91,12 @@ function tienePropiedad (objeto, propiedad) {
   // De lo contrario, devuelve "false"
   // Tu código:
 
+  if (objeto[propiedad] === null || objeto[propiedad] === undefined) {
+    return false
+  }
+  else {
+    return true;
+  }
 }
 
 function verificarPassword (usuario, password) {
@@ -103,8 +116,9 @@ function actualizarPassword (usuario, nuevaPassword) {
   // Reemplaza la contraseña existente en el objeto "usuario" con el valor de "nuevagPassword"
   // Devuelve el objeto
   // Tu código:
- 
+usuario.password = nuevaPassword;
 
+return usuario;
 
 }
 
@@ -127,6 +141,12 @@ function pasarUsuarioAPremium (usuarios) {
   // Define cada propiedad "esPremium" de cada objeto como "true"
   // Devuelve el array de usuarios
   // Tu código:
+  usuarios.forEach(elemento => {
+    elemento.esPremium = true
+    
+  });
+
+  return usuarios;
 
 }
 
@@ -137,6 +157,13 @@ function sumarLikesDeUsuario (usuario) {
   // Suma todos los likes de todos los objetos "post"
   // Devuelve la suma
   // Tu código:
+  //var suma = 0
+  //for (let i = 0; i < usuario.posts.length; i ++) {
+   // suma = suma + usuario.posts[i].likes
+  //}
+  //return suma;
+
+  return usuario.posts.reduce((acum, next)=> acum + next.likes, 0);
   
 
 }
@@ -152,12 +179,14 @@ function agregarMetodoCalculoDescuento (producto) {
   // producto.calcularPrecioDescuento() -> 20 - (20 * 0.2)
   // Tu código:
 
-  producto = {
-    calcularPrecioDescuento: function () {
-      producto.precio - (producto.precio * producto.porcentajeDeDescuento)
+   producto.calcularPrecioDescuento = function () {
+    return producto.precio - producto.precio * producto.porcentajeDeDescuento;
     }
 
-  }
+   
+  
+
+  
   return producto;
 
 }
